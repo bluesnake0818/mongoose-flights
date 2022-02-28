@@ -68,8 +68,8 @@ export {
 /* bonus user stories
 AAU, I want to view the list of flights by departure date in ascending order.
 AAU, I want the flights in the list to be displayed using red text if the flight’s departure date has passed.
-AAU, I want to delete flights from the list.
+// AAU, I want to delete flights from the list.
 
-Change flights/index to table form
+// Change flights/index to table form
 Style the index and new views.
 */
