@@ -20,7 +20,7 @@ function create(req, res){
     // revisit to fix the error handler
     if (err) return res.redirect('/flights/new')
     // revisit to redirect to /flights/index
-    res.redirect('/flights/new')
+    res.redirect('/flights')
   })
 }
 
@@ -30,6 +30,16 @@ function index(req, res) {
     res.render("flights/index", {
       error: error,
       flights: flights,
+      // time: req.time
+    })
+  })
+}
+
+function show(req, res) {
+  Flight.findById(req.params.id, function (error, flight) {
+    res.render('flights/show', {
+      flight: flight,
+      error: error
     })
   })
 }
@@ -40,4 +50,5 @@ export {
   newFlight as new, 
   create,
   index,
+  show,
 }

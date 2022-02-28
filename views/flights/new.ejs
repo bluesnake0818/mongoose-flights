@@ -12,6 +12,7 @@
   <form action="/flights" method="POST">
     <label>Airline: 
       <select name="airline">
+        <option value="">Select</option>
         <option value="American">American</option>
         <option value="Southwest">Southwest</option>
         <option value="United">United</option>
@@ -19,12 +20,12 @@
     </label><br>
     <label>Airport: 
       <select name="airport">
-        <option value="">Select</option>
         <option value="AUS">AUS</option>
         <option value="DFW">DFW</option>
-        <option value="DEN">DEN</option>
+        <option value="DEN" selected>DEN</option>
         <option value="LAX">LAX</option>
         <option value="SAN">SAN</option>
+        <option value=""></option>
       </select>
     </label><br>
     <label>Flight Number:
