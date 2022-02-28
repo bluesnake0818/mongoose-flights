@@ -30,7 +30,7 @@ function index(req, res) {
     res.render("flights/index", {
       error: error,
       flights: flights,
-      // time: req.time
+      time: req.time
     })
   })
 }

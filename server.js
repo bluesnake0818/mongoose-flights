@@ -34,12 +34,12 @@ app.use(
 )
 
 // mounted routers
+app.use(function (req, res, next) {
+  req.time = new Date().toLocaleDateString()
+  next()
+})
 app.use('/', indexRouter)
 app.use('/flights', flightsRouter)
-// app.use(function (req, res, next) {
-//   req.time = new Date().toLocaleDateString()
-//   next()
-// })
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
