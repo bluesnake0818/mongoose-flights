@@ -57,10 +57,13 @@ function deleteFlight(req, res) {
 
 function edit (req, res) {
   Flight.findById(req.params.id, function(err, flight) {
+    const dt = flight.departs;
+    const departsDate = dt.toISOString().slice(0, 16); 
     res.render('flights/edit', {
       flight,
       err,
-      title: "Edit Flight"
+      title: "Edit Flight",
+      departsDate,
     })
   })
 }
