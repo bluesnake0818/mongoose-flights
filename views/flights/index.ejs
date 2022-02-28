@@ -9,19 +9,36 @@
 </head>
 <body>
   <h1>Flight Schedule as of <%= time %></h1>
-  <% if(error) { %>
-    <h2><%= error %></h2>
-  <% } %>
-  <ul>
-    <% flights.forEach(flight => { %>
-      <li>
-        <a href="/flights/<%= flight._id %>"><%= flight._id %></a>
-         -
-         <%= flight.airline %>, <%= flight.airport %>, <%= flight.flightNo %>, <%= flight.departs %>   
-      </li>
-    <% }) %>
-  </ul>
-  <a href="/flights/new">Add Flight</a>
-</table>
+  <table id="list">
+    <thead>
+      <tr>
+        <th>Airline</th>
+        <th>Airport</th>
+        <th>Flight Number</th>
+        <th>Departure</th>
+        <th>Flight ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flights.forEach((flight) => { %>
+      <tr>
+        <td><%= flight.airline %></td>
+        <td><%= flight.airport %></td>
+        <td><%= flight.flightNo %></td>
+        <td><%= flight.departs %></td>
+        <td><a href="/flights/<%= flight._id %>">DETAILS</a></td>
+        <td>
+          <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST">
+            <button>X</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+
+
+
 </body>
 </html>
