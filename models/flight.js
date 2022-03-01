@@ -3,9 +3,15 @@ import mongoose from 'mongoose'
 // optional shortcut to the mongoose.Schema class
 const Schema = mongoose.Schema
 
-// const schemaOptions = {
-//   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
-// };
+const ticketSchema = new Schema({
+  seat: {type: String, match: /[A-F][1-9]\d?/},
+  price: {
+    type: Number,
+    min: 0,
+  }  
+}, {
+  timestamps: true
+})
 
 const flightSchema = new Schema({
   airline: {
@@ -27,7 +33,8 @@ const flightSchema = new Schema({
   departs: {
     type: Date,
     default: () => new Date(+new Date() + 365*24*60*60*1000)
-  }
+  },
+  tickets: [ticketSchema]
 }, {
     timestamps: true  
 })
