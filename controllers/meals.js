@@ -11,7 +11,11 @@ function newMeal(req, res) {
 }
 
 function create(req, res) {
-  console.log("sanity check")
+  Meal.create(req.body, function (err, meal) {
+    res.redirect('/meals/new')
+  }
+  
+  )
 }
 
 export {
