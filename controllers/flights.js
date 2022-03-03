@@ -1,4 +1,6 @@
+// import { redirect } from "express/lib/response";
 import { Flight } from "../models/flight.js"
+import { Meal } from "../models/meal.js"
 
 function newFlight(req, res) {
   const newFlight = new Flight();
@@ -23,7 +25,8 @@ function create(req, res){
     // revisit to fix the error handler
     if (err) return res.redirect('/flights/new')
     // revisit to redirect to /flights/index
-    res.redirect('/flights')
+    // res.redirect('/flights')
+    res.redirect(`/flights/${flight._id}`)
   })
 }
 
@@ -40,11 +43,17 @@ function index(req, res) {
 }
 
 function show(req, res) {
-  Flight.findById(req.params.id, function (error, flight) {
-    res.render('flights/show', {
-      flight: flight,
-      title: "Flight Detail",
-      error: error
+  // console.log("sanity check")
+  Flight.findById(req.params.id)
+  .populate('food')
+  // console.log("meals:" + meals)
+  .exec (function (err, flight) {
+    Meal.find({_id: {$nin: flight.food}}, function(err, meals) {
+      res.render('flights/show', { 
+        title: "Flight Detail", 
+        flight: flight,
+        meals,
+      })
     })
   })
 }
@@ -86,6 +95,15 @@ function createTicket(req, res) {
   })
 }
 
+function addToFood(req, res) {
+  Flight.findById(req.params.id, function(err, flight){
+    flight.food.push(req.body.mealId)
+    flight.save(function(err) {
+      res.redirect(`/flights/${flight._id}`)
+    })
+  })
+}
+
 export {
   newFlight as new, 
   create,
@@ -95,4 +113,5 @@ export {
   edit,
   update,
   createTicket,
+  addToFood,
 }

@@ -12,7 +12,7 @@ import('./config/database.js')
 // import routers
 import { router as indexRouter } from './routes/index.js'
 import { router as flightsRouter } from './routes/flights.js'
-import { router as mealsRouter } from './routes/meal.js'
+import { router as mealsRouter } from './routes/meals.js'
 
 
 // set up app
